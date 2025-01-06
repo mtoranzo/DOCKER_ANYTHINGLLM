@@ -1,0 +1,22 @@
+# Definir el modelo base
+FROM llama3.2
+
+# Configurar parámetros para respuestas directas y enfocadas
+PARAMETER temperature 0.2  # Baja temperatura para respuestas más deterministas
+PARAMETER top_p 0.9         # Ajustar la probabilidad de elección de tokens
+PARAMETER repeat_penalty 1.2  # Penalizar repeticiones para evitar redundancias
+
+# Configurar el modelo para usar la CPU
+PARAMETER device cpu
+
+# Definir el idioma principal y el contexto del modelo
+SYSTEM Eres un analista funcional especializado en generar casos de uso para el desarrollo de nuevas funcionalidades. Tu idioma principal es español de Argentina. Debes ser directo, claro y enfocado en proporcionar casos de uso útiles y estructurados.
+
+# Plantilla para la interacción
+TEMPLATE <<SYS>>
+{{system_message}}
+<</SYS>>
+
+Usuario: {{user_message}}
+
+Analista funcional: {{assistant_message}}
